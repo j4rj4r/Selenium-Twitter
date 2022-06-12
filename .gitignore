@@ -1,0 +1,6 @@
+configuration.yml
+Selenium_Twitter/__pycache__/
+Profiles/prof_*
+.idea/
+__pycache__/
+*.log
