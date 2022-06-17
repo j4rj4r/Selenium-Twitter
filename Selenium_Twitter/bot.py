@@ -4,6 +4,7 @@ import logging
 from Selenium_Twitter.Actions.search import Search
 from Selenium_Twitter.Actions.get_tweet import Get_tweet
 from Selenium_Twitter.helpers import wait_between, TypeInField, element_exists
+from Selenium_Twitter.Actions.bypass_antibot import BypassAntibot
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
@@ -46,11 +47,17 @@ class Bot:
             self.actions.move_to_element(cookie_el).click(cookie_el).perform()
             logging.info('Cookies accepted')
 
+        bypassantibot = BypassAntibot(self.driver, self.actions, self.configuration)
+        bypassantibot.newtab()
         search = Search(self.driver, self.actions, self.configuration)
         search.first_search()
 
         tweet_action = Get_tweet(self.driver, self.actions, self.configuration)
         tweet_action.get_tweet()
+
+        wait_between(sleeptime, sleeptime)
+        
+        bypassantibot.tweet()
 
         wait_between(sleeptime, sleeptime)
         

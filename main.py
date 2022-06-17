@@ -19,7 +19,8 @@ def main():
     logging.info('Starting bot ...')
 
     username = profile = config['account']['username']
-
+    profile = f'prof_{profile}'
+    
     logging.info(f'Username : {username}')
 
     # Initialize driver and actions
@@ -29,7 +30,7 @@ def main():
     bot = Bot(driver, action, config)
 
     # We check if the profile exists
-    if not os.path.exists(f'./Profiles/prof_{profile}'):
+    if not os.path.exists(f'./Profiles/{profile}'):
         url = 'https://twitter.com/i/flow/login'
         new = True
     else :
