@@ -84,7 +84,7 @@ class Get_tweet:
         return data
 
     def get_tweet(self):
-        WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((By.XPATH, self.pagecard_xpath)))
+        WebDriverWait(self.driver, 15).until(ec.visibility_of_element_located((By.XPATH, self.pagecard_xpath)))
         page_cards = self.driver.find_elements(by=By.XPATH, value=self.pagecard_xpath)
         for card in page_cards:
             data_card = self.get_data(card)

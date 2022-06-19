@@ -1,3 +1,4 @@
+from distutils.command.config import config
 from random import shuffle
 import logging
 
@@ -38,28 +39,38 @@ class Bot:
         else :
             # We check that we are well connected
             if element_exists('//input[@autocomplete="username"]', self.driver) :
+                new = True
                 self.login()
         
         logging.info('Logged in')
 
-        if element_exists('//span[contains(text(), "Accepter tous les cookies")]', self.driver):
-            cookie_el = self.driver.find_element(by=By.XPATH, value='//span[contains(text(), "Accepter tous les cookies")]')
-            self.actions.move_to_element(cookie_el).click(cookie_el).perform()
-            logging.info('Cookies accepted')
+        if new:
+            if element_exists('//span[contains(text(), "Accepter tous les cookies")]', self.driver):
+                cookie_el = self.driver.find_element(by=By.XPATH, value='//span[contains(text(), "Accepter tous les cookies")]')
+                self.actions.move_to_element(cookie_el).click(cookie_el).perform()
+                logging.info('Cookies accepted')
+        
+        if element_exists('//span[contains(text(), "Ignorer pour le moment")]', self.driver):
+            notif_el = self.driver.find_element(by=By.XPATH, value='//span[contains(text(), "Ignorer pour le moment")]')
+            self.actions.move_to_element(notif_el).click(notif_el).perform()
+            logging.info('Notification popup declined')
 
-        bypassantibot = BypassAntibot(self.driver, self.actions, self.configuration)
-        bypassantibot.newtab()
+        if self.configuration['BypassAntibot'] :
+            bypassantibot = BypassAntibot(self.driver, self.actions, self.configuration)
+            bypassantibot.newtab()
+
         search = Search(self.driver, self.actions, self.configuration)
         search.first_search()
+
 
         tweet_action = Get_tweet(self.driver, self.actions, self.configuration)
         tweet_action.get_tweet()
 
         wait_between(sleeptime, sleeptime)
         
-        bypassantibot.tweet()
-
-        wait_between(sleeptime, sleeptime)
+        if self.configuration['BypassAntibot'] :
+            bypassantibot.tweet()
+            wait_between(sleeptime, sleeptime)
         
         while True : 
             shuffle(self.configuration['WordsToSearch'])
