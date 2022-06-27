@@ -112,8 +112,7 @@ class Get_tweet:
                             try :
                                 card_hover = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((By.CSS_SELECTOR, 'div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-105ug2t.r-u8s1d.r-zchlnj.r-ipm5af')))
                             except :
-                                self.driver.execute_script("return arguments[0].scrollIntoView(true);", data_card['username_el'])
-                                card_hover = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((By.CSS_SELECTOR, 'div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-105ug2t.r-u8s1d.r-zchlnj.r-ipm5af')))
+                                pass
                             # Find the follow button
                             if element_exists('.//span[contains(text(), "Suivre")]', card_hover, by=By.XPATH) :
                                 follow_el = card_hover.find_element(by=By.XPATH, value='.//span[contains(text(), "Suivre")]')
