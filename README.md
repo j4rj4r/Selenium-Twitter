@@ -35,6 +35,8 @@ account:
     username : ""
     password : ""    
 ```
+Il faut mettre votre compte Twitter en Francais.
+
 
 ## Lancement :
 ```
