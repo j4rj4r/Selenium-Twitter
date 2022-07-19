@@ -5,6 +5,7 @@ account:
 AutoLike : True
 AutoRetweet : True
 AutoFollow : True
+BypassAntibot : False
 
 MinRetweet: 10
 

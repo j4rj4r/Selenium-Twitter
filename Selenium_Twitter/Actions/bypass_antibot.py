@@ -1,4 +1,4 @@
-from Selenium_Twitter.helpers import wait_between, TypeInField, element_exists
+from Selenium_Twitter.helpers import TypeInField, element_exists
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -30,4 +30,3 @@ class BypassAntibot:
         tweeter_el = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((By.XPATH, self.tweeter_button_xpath)))
         tweeter_el.send_keys(Keys.CONTROL + Keys.RETURN)
         self.driver.switch_to.window(self.driver.window_handles[0])
-        

@@ -4,7 +4,7 @@ Bot Twitter utilisant Selenium.
 
 ## Dépendance du script :
 
-Vous devez installer cette librarie python3 pour que le script fonctionne :
+Vous devez installer cette librairie python3 pour que le script fonctionne :
 ```
 selenium==4.1.5
 ```

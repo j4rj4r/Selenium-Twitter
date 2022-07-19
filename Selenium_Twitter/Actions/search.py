@@ -1,7 +1,7 @@
 from random import shuffle
 import logging
 
-from Selenium_Twitter.helpers import wait_between, TypeInField
+from Selenium_Twitter.helpers import TypeInField
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
