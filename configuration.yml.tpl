@@ -2,6 +2,8 @@ account:
     username : ""
     password : ""
 
+OperatingSystem: "Linux" # Linux or Windows
+
 AutoLike : True
 AutoRetweet : True
 AutoFollow : True

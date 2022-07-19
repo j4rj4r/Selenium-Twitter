@@ -9,7 +9,7 @@ class Driver:
         self.driver = None
         self.action = None
 
-    def setup(self, log_path='./logs/'):
+    def setup(self, log_path='./logs/', OperatingSystem='linux'):
         self.chrome_options = Options()
 
         # Anti bot detection
@@ -37,7 +37,7 @@ class Driver:
         # Set profile
         self.chrome_options.add_argument(f'user-data-dir=./Profiles/{self.profile}')
 
-        self.driver = webdriver.Chrome(options=self.chrome_options, service_args=[f'--log-path={log_path}ChromeDriver.log'])
+        self.driver = webdriver.Chrome(f'./ChromeDriver/{OperatingSystem}/chromedriver',options=self.chrome_options, service_args=[f'--log-path={log_path}ChromeDriver.log'])
         self.action = ActionChains(self.driver)
         return self.driver, self.action
     

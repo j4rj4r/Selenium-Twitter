@@ -25,7 +25,7 @@ def main():
 
     # Initialize driver and actions
     init_driver = Driver(profile)
-    driver, action = init_driver.setup()
+    driver, action = init_driver.setup(OperatingSystem=config['OperatingSystem'])
 
     bot = Bot(driver, action, config)
 
