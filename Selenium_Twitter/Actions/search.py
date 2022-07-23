@@ -18,18 +18,22 @@ class Search:
         self.clearsearch_xpath = '//div[@data-testid="clearButton"]'
 
     def first_search(self):
+        url = None
         shuffle(self.configuration['WordsToSearch'])
         wordlist = self.configuration['WordsToSearch']
         keyword = f'{wordlist[0]} min_retweets:{self.configuration["MinRetweet"]} -filter:replies lang:fr'
         logging.info(f'Search : {wordlist[0]}')
-        search_el = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((By.XPATH, self.search_xpath)))
-        self.actions.move_to_element(search_el).click(search_el).perform()
-        TypeInField(self.driver, self.search_xpath, keyword)
-        search_el.send_keys(Keys.RETURN)
+        try :
+            search_el = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((By.XPATH, self.search_xpath)))
+            self.actions.move_to_element(search_el).click(search_el).perform()
+            TypeInField(self.driver, self.search_xpath, keyword)
+            search_el.send_keys(Keys.RETURN)
 
-        latest_el = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((By.XPATH, self.latest_xpath)))
-        self.actions.move_to_element(latest_el).click(latest_el).perform()
-
+            latest_el = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((By.XPATH, self.latest_xpath)))
+            self.actions.move_to_element(latest_el).click(latest_el).perform()
+        except :
+            logging.info('Search path not found, use url instead')
+            self.driver.get(f'https://twitter.com/search?q={wordlist[0]}+min_retweets%3A{self.configuration["MinRetweet"]}+lang%3Afr+-filter%3Areplies&f=live')
 
     def search(self, word):
         search_el = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((By.XPATH, self.search_xpath)))

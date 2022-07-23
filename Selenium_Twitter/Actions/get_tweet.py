@@ -14,6 +14,7 @@ class Get_tweet:
         self.actions = action
         self.configuration = configuration
         self.pagecard_xpath = '//article[@data-testid="tweet"]'
+        self.cardhoover_xpath = 'div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-105ug2t.r-u8s1d.r-zchlnj.r-ipm5af'
     
     def get_data(self, card):
         """Extract data from tweet card"""
@@ -110,7 +111,7 @@ class Get_tweet:
                             username_el = data_card['username_el']
                             self.actions.move_to_element(username_el).perform()
                             try :
-                                card_hover = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((By.CSS_SELECTOR, 'div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-105ug2t.r-u8s1d.r-zchlnj.r-ipm5af')))
+                                card_hover = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((By.CSS_SELECTOR, self.cardhoover_xpath)))
                             except :
                                 pass
                             # Find the follow button
